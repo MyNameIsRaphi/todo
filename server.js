@@ -8,6 +8,8 @@ import bodyParser from "body-parser"
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
+
+
 let port = 3000
 
 app.use(express.static("Public"))
@@ -54,7 +56,9 @@ app.get("/", (req, res) => {
 
 
 
-
+app.get("/register", (req, res) => {
+    res.render("register.ejs")
+})
 
 
 app.post("/login", async (req, res) => {
