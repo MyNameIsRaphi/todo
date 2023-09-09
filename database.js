@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-import {hash, compareHash, connectDB} from "./functions.js"
+import { hash, compareHash, connectDB } from "./functions.js"
 
 
 class Database {
@@ -16,29 +16,29 @@ class Database {
         })
 
         let sh = new mongoose.Schema(schema)
-         this.Schema = new mongoose.model("Schema", sh)
-        
+        this.Schema = new mongoose.model("Schema", sh)
+
     }
 
     async ValidateUser(user) {
 
         let object = {
-            email:user.email
+            email: user.email
         }
 
         let collection = await this.Schema.find(object)
 
         let exists = collection.length > 0;
 
-        if (exists){
+        if (exists) {
             let password = user.password
             let hashedPassword = collection[0].password
-            let match = await compareHash(password,hashedPassword)
+            let match = await compareHash(password, hashedPassword)
 
-            if (match){
+            if (match) {
                 return true;
             }
-            
+
         }
         return false
 
