@@ -2,13 +2,15 @@ import express from "express"
 import https from "https"
 import fs from "fs"
 
-import mongoose, { Schema } from "mongoose";
+import {Database} from "./database.js"
 import bodyParser from "body-parser"
-import { error } from "console";
+
 const app = express()
 
 app.use(bodyParser.urlencoded({extended:true}))
 let port = 3000
+
+app.use(express.static("Public"))
 
 const todos = {
     title:String,
@@ -24,15 +26,11 @@ const user = {
     
 }
 
+let database = new Database(user);
 
-let loginData = {}
 
 
-async function connectDB(){
-    const uri = "mongodb://127.0.0.1:27017/todo2";
-    await mongoose.connect(uri, {useNewUrlParser:true});
-    return 
-}
+
 
 const todo = {
     title:String,
@@ -41,54 +39,39 @@ const todo = {
     untilDate:Date
 }
 
-let connected = false;
 
-connectDB().catch(error => {
-    console.log(error);
-}).then(()=>{
-    
-    connected = true;
-})
+
 
 
 
 
 app.get("/", (req,res) =>{
-    // send right data with session id
-    if (res.statusCode == 201){
-        loginData = {
-            unAuth:true
-        }
-    }
-    console.log(loginData);
-    res.render("login.ejs",loginData)
+   
+   
+    res.render("login.ejs")
     
 })
-const schema = new mongoose.Schema({
-    email:String,
-    password:String,
-    todos: [todo]
-})
-const UserModels = mongoose.model("UserModels", schema)
-app.use(express.static("public"))
+
+
+
+
 
 
 app.post("/login", async (req, res) => {
-    console.log(connected);
-   
-    if (connected){
-        
-        let login = await UserModels.exists({
-            email:req.body.email,
-            password:req.body.password
-        })
-        if (!login){
-            
-            
-            res.redirect(201,"/")
+    
+    let body = req.body;
+
+    database.ValidateUser(body).then(
+        (isValid) => {
+            if (isValid) {
+                res.json({isValid:true})
+            }else {
+                res.json({isValid:false})
+            }
         }
-        console.log(login)
-    }
+    )
+
+
     }
     )  
 
