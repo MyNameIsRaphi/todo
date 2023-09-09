@@ -3,4 +3,4 @@ A todo app with login and register page. When you register you should receive an
 
 Server runs in server.js file.
 
-HTTPS CA is self-signed
+User must use their own HTTPS CA called cert.pem and their own key called key.pem
