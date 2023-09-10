@@ -21,9 +21,14 @@ body {
 }
 
 .first{
+    display: grid;
+    grid-template-rows: 3fr 10fr;
+    
+}
+.title {
+    grid-area: 2/1/2/1;
     display: flex;
     justify-content: center;
-    align-items: end;
 }
 .second{
     display: grid;
@@ -59,8 +64,8 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
 }
 
-.third > div {
-    display: none;
+.error {
+    visibility:hidden;
     color:red;
 }
 #submitButtonDIV{

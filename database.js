@@ -67,6 +67,10 @@ class Database {
                 }
 
             }
+        ).catch(
+            (error)=>{
+                throw error;
+            }
         )
 
 

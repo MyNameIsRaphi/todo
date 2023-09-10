@@ -18,7 +18,13 @@
       <div class="main">
         <div class="form">
           <div class="first">
-            <h1>Register</h1>
+            <div class="title">
+              <h1>Register</h1>
+            </div>
+            <form method="get" action="/">
+              <button type="submit" class="btn btn-link">Sign in</button>
+            </form>
+            
           </div>
           <div class="second">
             <div class="email">
@@ -27,7 +33,10 @@
                 <div class="input-group">
                   <div class="input-group-text">@</div>
                   <input type="email" class="form-control enteredEmail" id="specificSizeInputGroupUsername" placeholder="Email">
+                  
                 </div>
+                <div id="emailHelp" class="form-text emailUsedError error">Account with this email already exists</div>
+                <div id="emailHelp" class="form-text noEmailError error">Please enter a valid email address</div>
             </div>
           </div>
           <div class="password">
@@ -43,7 +52,7 @@
             </div>
             <div>
               <div class="col-md-7">
-                <label for="inputPassword4" class="form-label">
+                <label for="inputPassword5" class="form-label">
                   Confirm password
                 </label>
                 <input
@@ -51,7 +60,9 @@
                   class="form-control confirmedPassword"
                   id="inputPassword5"
                 />
-                
+                <div id="emailHelp" class="form-text noMatchError error">Passwords don't match</div>
+                <div id="emailHelp" class="form-text noPasswordError error">Password must be at least 8 charactes long</div>
+
               </div>
             </div>
           </div>
@@ -60,18 +71,7 @@
             <div id="submitButtonDIV">
               <button type="button" class="btn btn-primary" id="signin">Register</button>
             </div>
-            <div id="noMatchError">
-              <label >Passwords don't match</label>
-            </div>
-            <div id="noEmailError"> 
-              <label> Please provide a valid email </label>
-            </div>
-            <div id="noPasswordError">
-              <label >Password must be at least 8 charactes long</label>
-            </div>
-            <div id="emailUsedError">
-              <label >Account with this email already exists</label>
-            </div>
+           
             
           </div>
         </div>

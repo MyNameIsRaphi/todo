@@ -11,13 +11,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sign in</title>
-    <link rel="stylesheet" href="style.css" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="main">
@@ -25,36 +26,33 @@
         <h1>Sign in</h1>
       </div>
       <div class="frm login">
-        <div class="loginDiv">
-          <label for="email">email</label>
-          <input type="email" placeholder="email" name="email" required class="email"/>
-          <label for="password">password</label>
-          <input
-            type="password"
-            placeholder="password"
-            name="password"
-            class="password"
-            required
-          />
-          <input
-            type="button"
-            value="login"
-            class="btn btn-primary button"
-            id="submit"
-          />
+        <div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email</label>
+            <input type="email" class="form-control email" id="exampleInputEmail1" aria-describedby="emailHelp">
+            
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control password" id="exampleInputPassword1">
+            <div id="emailHelp" class="form-text isvalid">Password or email is wrong</div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" id="submit">Sign in</button>
         </div>
       </div>
       <div class="register">
         <form method="GET" action="/register">
-          <label>You don't have an account? </label>
-          <input type="submit" value="register" class="btn btn-link" />
+          <label>You don't have an account yet? </label>
+          <button type="submit" class="btn btn-link">register</button>
           
-          <p class="isvalid">Password or username false</p>
+         
           
         </form>
       </div>
     </div>
   </body>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="index.js"></script>
   

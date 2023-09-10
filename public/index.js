@@ -27,7 +27,7 @@ async function validateUserLogin(email, password) {
 
     response = response.json()
 
-    return requestBody.isValid
+    return response.isValid
 
 }
 
@@ -65,3 +65,22 @@ submitButton.click((event) => {
         }
     })
 })
+
+
+async function startApp(email, password) {
+    let body = {
+        email: email,
+        password: password
+    }
+    let options = {
+        method: "GET",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(body)
+    }
+    let address = "https://localhost:3000/todo"
+
+    fetch(
+        address,
+        options
+    )
+}

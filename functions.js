@@ -3,8 +3,12 @@ import mongoose from "mongoose";
 
 async function connectDB() {
     const uri = "mongodb://127.0.0.1:27017/todo2";
-    await mongoose.connect(uri, { useNewUrlParser: true });
-    return
+     mongoose.connect(uri, { useNewUrlParser: true }).catch(
+        (error)=> {
+            throw error;
+        }
+     );
+    
 }
 
 function hash(letter) {

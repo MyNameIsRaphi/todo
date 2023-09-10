@@ -79,6 +79,30 @@ app.post("/login", async (req, res) => {
 }
 )
 
+app.post("/register", async (req, res) => {
+    let body = {
+        email:req.email,
+        password:req.password
+    }
+    let createdUser = await database.addUser(body)
+    if (createdUser){
+        res.json({
+            created:createdUser,
+            error:""
+        })
+    }else {
+        res.json({
+            created:false,
+            error:"User woth this email already exists"
+        })
+        
+    }
+})
+
+
+app.get("/todo", (req,res) => {
+    res.render("todo.ejs")
+})
 
 const server = https.createServer({
     key: fs.readFileSync("key.pem"),

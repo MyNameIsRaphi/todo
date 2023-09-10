@@ -6,7 +6,9 @@
     width: 100vw;
     color:#102C57;
 }
-
+*{
+        marign:0px;
+}
 
 .title {
     grid-area: 1/2/1/3;
@@ -18,43 +20,7 @@
     grid-area: 2/2/2/3;
     
 }
-.button {
-    width: 20%;
-}
 
-.login > div > input {
-    width: 60%;
-}
-
-.loginDiv {
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  
-}
-
-.email {
-  height: 2rem;
-}
-.password {
-  height: 2rem;
-}
-
-.loginDiv > * {
-  margin-top: 0.1vh;
-  display: flex;
-  align-items: end;
-  
-}
-
-.email {
-  margin-top: 0px;
-}
-
-.login > form   {
-    font-family: 'Roboto', sans-serif;
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-}
 .register {
     font-family: 'Roboto', sans-serif;
     grid-area: 3/2/3/3;
@@ -73,13 +39,10 @@ body {
 }
 
 
-.password {
-    margin-bottom: 1vh;
-}
 .isvalid {
   display: none;
   color:red;
-  font-weight: bold;
+  
 }
 
 
