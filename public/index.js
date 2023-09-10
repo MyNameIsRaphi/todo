@@ -13,9 +13,11 @@ async function validateUserLogin(email, password) {
         password: password,
         email: email
     }
+    console.log(requestBody)
 
     let options = {
         method: "POST",
+        mode:"cors",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(requestBody)
     }
@@ -40,7 +42,7 @@ async function goToStartPage(email, password){
     }
     let options = {
         method: "POST",
-        headers:{"content-type":"application/json"},
+        headers:{'Content-Type': 'application/json'},
         body: JSON.stringify(requestBody)
     }
     let response = await fetch(

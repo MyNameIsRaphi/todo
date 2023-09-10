@@ -1,3 +1,5 @@
+
+
 let confirmInput = $("#inputPassword4");
 
 let newPassword = $("#inputPassword5")
@@ -17,7 +19,7 @@ let emailUsedError = $(".emailUsedError")
 let email = $(".enteredEmail")
 
 submitButton.click(
-    async (event) => {
+     (event) => {
         unDisplayAllErrors()
         let validEmail = (validateEmail(email.val()))
 
@@ -36,15 +38,18 @@ submitButton.click(
         } else if (password.length < 8) {
             displayError(noPasswordError)
         } else {
-            let reponse = await createUser(email.val(), password);
-            if (reponse.created) {
-                console.log("Created")
-            } else {
-                console.log(reponse.error);
-                displayError(emailUsedError);
-            }
-        }
+            createUser(email.val(), password).then(
+                (result) => {
+                    if (result.created){
+                        console.log("User created")
+                    }else {
+                        displayError(emailUsedError)
+                    }
+                }
+            )
+            
     }
+}
 )
 
 
@@ -62,17 +67,23 @@ function validateEmail(email) {
 
 
 async function createUser(email, password) {
-    let options = {
-        mehtod: "post",
-        headers: { "content-type": "json" },
-        body: JSON.stringify({ email: email, password: password })
+    console.log(email, password, " password")
+    console.log("Creating user")
+    let body = {
+        email: email,
+        password: password
     }
-    let address = "https://localhost:3000/register"
+    let options = {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(body)
+    }
+    let address = "https://localhost:3000/registering"
 
     let response = await fetch(
         address,
-        options
-    )
+        options)
+    console.log(response)
     return response
 }
 

@@ -7,6 +7,9 @@ import bodyParser from "body-parser"
 
 const app = express()
 
+
+app.use(express.json()) // add this to accept json input
+
 app.use(bodyParser.urlencoded({ extended: true }))
 
 
@@ -64,7 +67,7 @@ app.get("/register", (req, res) => {
 app.post("/login", async (req, res) => {
 
     let body = req.body;
-
+    console.log(req.body)
     database.ValidateUser(body).then(
         (isValid) => {
             if (isValid) {
@@ -79,15 +82,17 @@ app.post("/login", async (req, res) => {
 }
 )
 
-app.post("/register", async (req, res) => {
+app.post("/registering", async (req, res) => {
+    console.log(req.body)
     let body = {
-        email:req.email,
-        password:req.password
+        email:req.body.email,
+        password:req.body.password
     }
+    
     let createdUser = await database.addUser(body)
     if (createdUser){
         res.json({
-            created:createdUser,
+            created:true,
             error:""
         })
     }else {

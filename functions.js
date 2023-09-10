@@ -11,23 +11,20 @@ async function connectDB() {
     
 }
 
-function hash(letter) {
-    bycrpt.hash(letter, 10).then(
-        (hash) => {
-            return hash
-        }).catch(
-            (error) => {
-                console.log(error)
-                return ""
-            }
-        )
+async function hash(letter) {
+    console.log(letter)
+    return await bycrpt.hash(letter, 10)
 }
 
 async function compareHash(word, hasedWord) {
+    console.log(word)
+    console.log(hasedWord)
+     bycrpt.compare(word, hasedWord,(err,result) => {
+        console.log(err)
+        return result
+     })
 
-    const match = await bycrpt.compare(word, hasedWord)
-
-    return match
+   
 
 }
 
