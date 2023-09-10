@@ -55,8 +55,16 @@ body {
 }
 
 .third {
-    display: flex;
-    align-content: end;
-    justify-content: center;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
+.third > div {
+    display: none;
+    color:red;
+}
+#submitButtonDIV{
+    grid-area: 1/1/1/1;
+    display: flex;
+    justify-content: center;
+}
