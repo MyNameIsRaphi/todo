@@ -64,51 +64,62 @@ app.get("/register", (req, res) => {
 })
 
 
-app.post("/login", async (req, res) => {
-
+app.post("/", async (req, res) => {
+    
     let body = req.body;
-    console.log(body)
+
     let valid = await database.ValidateUser(body)
     console.log(valid)
-           
-    res.json({login:valid})
+    if (valid) {
+        res.render("index.ejs")
+    } else {
+        res.render("login.ejs", { UnAuth: true })
+    }
+
 
 
 }
 )
 
 app.post("/registering", async (req, res) => {
-    console.log(req.body)
-    let body = {
-        email: req.body.email,
-        password: req.body.password
+    let password = req.body.password
+    let confirmedPassword = req.body.confirmedPassword
+    let email = req.body.email
+    
+    if (password !== confirmedPassword) {
+        res.render("register.ejs", { noMatchError: true })
+        return
+    } else if (password.length < 8) {
+        res.render("register.ejs", { noPasswordError: true })
+    } else if (!validateEmail(email)) {
+        res.render("register.ejs", { noEmailError: true })
+    } else {
+        let body = {
+            email: req.body.email,
+            password: req.body.password
+        }
+
+        database.addUser(body).then(
+            (createdUser) => {
+                console.log(createdUser)
+
+                if (createdUser) {
+                    res.redirect("/")
+
+                } else {
+                    res.render("register.ejs",{emailUsedError :true})
+
+                }
+            }
+        )
     }
 
-    database.addUser(body).then(
-        (createdUser) => {
-            console.log(createdUser)
-            
-            if (createdUser) {
-                res.json({
-                    created: true
-                })
 
-            } else {
-                res.json({
-                    created: false,
-                    error: "User woth this email already exists"
-                })
-
-            }
-        }
-    )
-
-})
+}
+)
 
 
-app.get("/todo", (req, res) => {
-    res.render("todo.ejs")
-})
+
 
 const server = https.createServer({
     key: fs.readFileSync("key.pem"),
@@ -116,7 +127,11 @@ const server = https.createServer({
 }, app)
 
 server.listen(port, (req, res) => {
-    console.log("Server started listening")
+    console.log("Server started listening on port ", port)
 
 })
 
+function validateEmail(email) {
+    var regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    return regex.test(email);
+}

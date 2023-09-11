@@ -19,14 +19,9 @@ async function hash(letter) {
 async function compareHash(word, hasedWord) {
     console.log(word)
     console.log(hasedWord)
-     bycrpt.compare(word, hasedWord,(err,result) => {
-        console.log(err)
-        console.log(result)
-        return result
-     })
+     return bycrpt.compareSync(word, hasedWord)
 
-   
-
+  
 }
 
 export {

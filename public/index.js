@@ -13,11 +13,10 @@ async function validateUserLogin(email, password) {
         password: password,
         email: email
     }
-    console.log(requestBody)
+    
 
     let options = {
         method: "POST",
-        mode:"cors",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(requestBody)
     }
@@ -38,7 +37,7 @@ async function validateUserLogin(email, password) {
 
 async function goToStartPage(email, password){
     let path = "/todo"
-    let address = "localhost:3000" + password
+    let address = "localhost:3000" + paath
 
     let requestBody = {
         email: email
@@ -62,7 +61,7 @@ submitButton.click(async (event) => {
 
     let valid = await validateUserLogin(email, password)
     console.log(valid)
-    if (valid){
+    if (valid.login){
         goToStartPage(email,password)
     }else {
         console.log("invalid")

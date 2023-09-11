@@ -25,22 +25,26 @@
       <div class="title roll-in-blurred-left">
         <h1>Sign in</h1>
       </div>
-      <div class="frm login">
+      <form class="frm login" method="POST" action="/">
         <div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email</label>
-            <input type="email" class="form-control email" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="email" class="form-control email" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
             
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control password" id="exampleInputPassword1">
-            <div id="emailHelp" class="form-text isvalid">Password or email is wrong</div>
+            <input type="password" class="form-control password" id="exampleInputPassword1" name="password">
+            <% if (locals.UnAuth) { %>
+            <div style="visibility: visible;"emailHelp" class="form-text isvalid">Password or email is wrong</div>
+            <% } else {%>
+            <div style="visibility: hidden;"emailHelp" class="form-text isvalid">Password or email is wrong</div>
+            <% } %>
           </div>
           
           <button type="submit" class="btn btn-primary" id="submit">Sign in</button>
         </div>
-      </div>
+      </form>
       <div class="register">
         <form method="GET" action="/register">
           <label>You don't have an account yet? </label>
@@ -53,7 +57,6 @@
     </div>
   </body>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="index.js"></script>
+
   
 </html>

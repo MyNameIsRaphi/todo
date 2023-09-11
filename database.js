@@ -25,17 +25,19 @@ class Database {
         let object = {
             email: user.email
         }
+       
 
         let collection = await this.Schema.find(object)
-        console.log(collection)
+       
         let exists = collection.length > 0;
-        console.log(exists)
+        
         if (exists) {
             let password = user.password
             let hashedPassword = collection[0].password
-            console.log(password, hashedPassword)
-            console.log(collection)
-            let match = await compareHash(password, hashedPassword)
+            
+            let match =  compareHash(password, hashedPassword)
+
+           
 
             return match
 
@@ -44,30 +46,29 @@ class Database {
 
     }
     async addUser(user) {
-        console.log(user)
+       
         let object = {
             email: user.email
         }
-        console.log(object)
+        
         let created
         let alreadyExist = await this.Schema.exists(object)
 
 
 
-        console.log("Adding user")
+        
         if (!alreadyExist) {
             user.password = await hash(user.password)
 
-            console.log(user.password)
             let newUser = new this.Schema(user)
 
             await newUser.save()
-            console.log("user created")
+          
             created = true
         } else {
             created = false
         }
-        console.log("Return of adduser ", created)
+      
         return created
 
 

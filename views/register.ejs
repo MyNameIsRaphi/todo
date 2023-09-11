@@ -26,24 +26,33 @@
             </form>
             
           </div>
-          <div class="second">
+          <form method="POST" action="/registering" class="second">
             <div class="email">
               <div class="col-md-7">
                 <label class="visually-hidden" for="specificSizeInputGroupUsername">Email</label>
                 <div class="input-group">
                   <div class="input-group-text">@</div>
-                  <input type="email" class="form-control enteredEmail" id="specificSizeInputGroupUsername" placeholder="Email">
+                  <input type="email" name= "email" class="form-control enteredEmail" id="specificSizeInputGroupUsername" placeholder="Email">
                   
                 </div>
+                <% if (locals.emailUsedError){ %>
                 <div id="emailHelp" class="form-text emailUsedError error">Account with this email already exists</div>
+                <% } else { %>
+                  <div style="visibility: hidden;" id="emailHelp" class="form-text emailUsedError error">Account with this email already exists</div>
+                  <% } %>
+                  <%   if (locals.noEmailError){ %>
                 <div id="emailHelp" class="form-text noEmailError error">Please enter a valid email address</div>
-            </div>
+                <% } else {%>
+                  <div style="visibility: hidden;" id="emailHelp" class="form-text noEmailError error">Please enter a valid email address</div>
+                  
+                </div>
           </div>
           <div class="password">
             <div class="newPassword"> 
               <div class="col-md-7">
                 <label for="inputPassword4" class="form-label">Password</label>
                 <input
+                name="password"
                   type="password"
                   class="form-control newPassword"
                   id="inputPassword4"
@@ -57,19 +66,28 @@
                 </label>
                 <input
                   type="password"
+                  name="confirmedPassword"
                   class="form-control confirmedPassword"
                   id="inputPassword5"
                 />
+                <% } if (locals.noMatchError){ %>
                 <div id="emailHelp" class="form-text noMatchError error">Passwords don't match</div>
-                <div id="emailHelp" class="form-text noPasswordError error">Password must be at least 8 charactes long</div>
-
+                <% } else {%>
+                <div style="visibility: hidden;" id="emailHelp" class="form-text noMatchError error">Passwords don't match</div>
+                <% } %>
+                <%  if (locals.noPassWordError){ %>
+                <div id="emailHelp" class="form-text noPasswordError error ">Password must be at least 8 charactes long</div>
+                
+                <% } else { %>
+                  <div style="visibility: hidden;" id="emailHelp" class="form-text noPasswordError error">Password must be at least 8 charactes long</div>
+                  <% } %>
               </div>
             </div>
-          </div>
+          </form>
 
           <div class="third">
             <div id="submitButtonDIV">
-              <button type="button" class="btn btn-primary" id="signin">Register</button>
+              <button type="submit" class="btn btn-primary" id="signin">Register</button>
             </div>
            
             
@@ -78,6 +96,5 @@
       </div>
     </div>
   </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="register.js"></script>
+ 
 </html>
