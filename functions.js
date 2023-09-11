@@ -21,6 +21,7 @@ async function compareHash(word, hasedWord) {
     console.log(hasedWord)
      bycrpt.compare(word, hasedWord,(err,result) => {
         console.log(err)
+        console.log(result)
         return result
      })
 

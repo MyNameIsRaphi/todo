@@ -27,9 +27,12 @@ async function validateUserLogin(email, password) {
         options
     )
 
-    response = response.json()
+    
 
-    return response.isValid
+    
+    response = response.json()
+    console.log(response)
+    return response
 
 }
 
@@ -52,20 +55,20 @@ async function goToStartPage(email, password){
     
 }
 
-submitButton.click((event) => {
+submitButton.click(async (event) => {
     let password = $(".password").val()
     console.log("Validating")
     let email = $(".email").val()
 
-    validateUserLogin(email, password).then((valid) => {
-        if (valid){
-            goToStartPage(email,password)
-        }else {
-            console.log("invalid")
-            let invalidMessage = $(".isvalid")
-            invalidMessage.css("display","block")
-        }
-    })
+    let valid = await validateUserLogin(email, password)
+    console.log(valid)
+    if (valid){
+        goToStartPage(email,password)
+    }else {
+        console.log("invalid")
+        let invalidMessage = $(".isvalid")
+        invalidMessage.css("display","block")
+    }
 })
 
 

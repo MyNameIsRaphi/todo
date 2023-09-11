@@ -67,16 +67,11 @@ app.get("/register", (req, res) => {
 app.post("/login", async (req, res) => {
 
     let body = req.body;
-    console.log(req.body)
-    database.ValidateUser(body).then(
-        (isValid) => {
-            if (isValid) {
-                res.json({ isValid: true })
-            } else {
-                res.json({ isValid: false })
-            }
-        }
-    )
+    console.log(body)
+    let valid = await database.ValidateUser(body)
+    console.log(valid)
+           
+    res.json({login:valid})
 
 
 }
@@ -85,27 +80,33 @@ app.post("/login", async (req, res) => {
 app.post("/registering", async (req, res) => {
     console.log(req.body)
     let body = {
-        email:req.body.email,
-        password:req.body.password
+        email: req.body.email,
+        password: req.body.password
     }
-    
-    let createdUser = await database.addUser(body)
-    if (createdUser){
-        res.json({
-            created:true,
-            error:""
-        })
-    }else {
-        res.json({
-            created:false,
-            error:"User woth this email already exists"
-        })
-        
-    }
+
+    database.addUser(body).then(
+        (createdUser) => {
+            console.log(createdUser)
+            
+            if (createdUser) {
+                res.json({
+                    created: true
+                })
+
+            } else {
+                res.json({
+                    created: false,
+                    error: "User woth this email already exists"
+                })
+
+            }
+        }
+    )
+
 })
 
 
-app.get("/todo", (req,res) => {
+app.get("/todo", (req, res) => {
     res.render("todo.ejs")
 })
 

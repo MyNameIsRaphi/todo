@@ -40,6 +40,7 @@ submitButton.click(
         } else {
             createUser(email.val(), password).then(
                 (result) => {
+                    console.log(result.created)
                     if (result.created){
                         console.log("User created")
                     }else {
@@ -83,7 +84,7 @@ async function createUser(email, password) {
     let response = await fetch(
         address,
         options)
-    console.log(response)
+     response = response.json()
     return response
 }
 
