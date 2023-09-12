@@ -13,7 +13,7 @@ async function connectDB() {
 
 async function hash(letter) {
     console.log(letter)
-    return await bycrpt.hash(letter, 10)
+    return  bycrpt.hashSync(letter, 10) //use hashSync bescause hashSync is already in async function
 }
 
 async function compareHash(word, hasedWord) {
