@@ -5,7 +5,7 @@ import { hash, compareHash, connectDB } from "./functions.js"
 
 class Database {
 
-    constructor(schema) {
+    constructor(schema) {    
         let connected = false;
 
         connectDB().catch(error => {
@@ -36,7 +36,7 @@ class Database {
             let password = user.password
             let hashedPassword = collection[0].password
             
-            let match =  compareHash(password, hashedPassword)
+            let match =  await compareHash(password, hashedPassword)
 
            
 
@@ -122,7 +122,7 @@ class Database {
                 let exists = collection.length > 0;
                 if (exists) {
                     let hashPassword = collection[0].password
-                    let match = compareHash(user.password, hashPassword)
+                    let match = await compareHash(user.password, hashPassword)
                     if (match) {
                         await this.Schema.deleteOne(object);
                         return true;

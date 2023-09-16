@@ -13,7 +13,7 @@ async function connectDB() {
 
 async function hash(letter) {
    
-    return await bycrpt.hash(letter, 12)
+    return await bycrpt.hashSync(letter, 10)
 }
 
 async function compareHash(word, hasedWord) {
