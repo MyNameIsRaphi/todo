@@ -84,6 +84,7 @@ async function createUser(email, password) {
     let response = await fetch(
         address,
         options)
+        
      response = response.json()
     return response
 }

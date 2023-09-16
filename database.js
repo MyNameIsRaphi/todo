@@ -15,6 +15,7 @@ class Database {
             connected = true;
         })
 
+
         let sh = new mongoose.Schema(schema)
         this.Schema = new mongoose.model("Schema", sh)
 
